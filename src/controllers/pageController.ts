@@ -1,22 +1,55 @@
 import { Request, Response } from 'express';
+import { createMenuObjects } from '../helpers/createMenuObject';
+import { Pet } from '../models/Pet';
 
 export const home = (req: Request, res: Response) => { 
-    // res.render('pages/page');
-    res.send('home')
+    let list = Pet.getAll();
+    res.render('pages/page', {
+        menu: createMenuObjects('all'),
+        banner: {
+            title: 'Todos os animais',
+            background: 'allanimals.jpg'
+        },
+        list: list
+    });
 }
 
 export const dogs = (req: Request, res: Response) => { 
-    //res.render('pages/page');
-    res.send('dogs')
+    let list = Pet.getFromType('dog');
+
+    res.render('pages/page', {
+        menu: createMenuObjects('dog'),
+        banner: {
+            title: 'Cachorros',
+            background: 'banner_dog.jpg'
+        },
+        list: list
+    });
 }
 
 export const cats = (req: Request, res: Response) => { 
-    //res.render('pages/page');
-    res.send('cats')
+    let list = Pet.getFromType('cat');
+
+    res.render('pages/page', {
+        menu: createMenuObjects('cat'),
+        banner: {
+            title: 'Gatos',
+            background: 'banner_cat.jpg'
+        },
+        list: list
+    });
     
 }
 export const fishes = (req: Request, res: Response) => { 
-    //res.render('pages/page');
-    res.send('fishes')
+    let list = Pet.getFromType('fish');
+
+    res.render('pages/page', {
+        menu: createMenuObjects('fish'),
+        banner: {
+            title: 'Peixes',
+            background: 'banner_fish.jpg'
+        },
+        list: list
+    });
 
 }
